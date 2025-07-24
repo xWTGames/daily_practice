@@ -178,7 +178,7 @@ entry_amount = tk.Entry(root)
 entry_amount.pack()
 tk.Button(root, text="Поповнити", command=deposit_money).pack()
 tk.Button(root, text="Зняти", command=withdraw_money).pack()
-
+s
 root.mainloop()
 
 """
