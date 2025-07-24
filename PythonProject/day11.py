@@ -176,7 +176,6 @@ listbox_accounts.pack()
 tk.Label(root, text="Сума").pack()
 entry_amount = tk.Entry(root)
 entry_amount.pack()
-skklkk
 tk.Button(root, text="Поповнити", command=deposit_money).pack()
 tk.Button(root, text="Зняти", command=withdraw_money).pack()
 
