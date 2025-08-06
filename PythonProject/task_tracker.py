@@ -17,26 +17,69 @@ def show_tasks():
     for t in task_list:
         print(f"{t["id"]}. {t["text"]} - {t["status"]}")
 
+def get_task_index():
+    while True:
+        try:
+            index = int(input("Виберіть завдання: ")) -1
+            if 0<= index < len(task_list):
+                return index
+            else:
+                print("Такого завдання не існує, спробуйте ще раз.")
+        except ValueError:
+            print("Невірне значення, спробуйте ще раз.")
+
+
+
 def edit_task():
     show_tasks()
-    choice = int(input("Виберіть завдання для оновлення: ")) -1
+    choice = get_task_index()
     task_text = input("Запишіть оновлене завдання: ")
     task = {"id": choice,
             "text": task_text,
             "status": "не виконано"}
     task_list[choice] = task
 
+
 def del_task():
     show_tasks()
-    choice = int(input("Виберіть завдання, яке бажаєте видалити: ")) -1
+    choice = get_task_index()
     task_list.pop(choice)
+    print("Завдання успішно видалено!")
 
 def mark_task():
     show_tasks()
-    choice = int(input("Виберіть завдання, якому бажаєте змінити статус: ")) - 1
-    mark = input("Напишіть статус завдання: ")
-    task_list[choice]["status"] = mark
-    print("Статус успішно змінено!")
+    choice = get_task_index()
+
+    statuses = {
+        "1": "Виконано",
+        "2": "В процесі",
+        "3": "Не виконано"
+    }
+    while True:
+        print("Виберіть, який статус призначити: \n 1. Виконано \n 2. В процесі \n 3. Не виконано")
+        choice_status = input("Ваш вибір: ")
+        if choice_status in statuses:
+            task_list[choice]["status"] = statuses[choice_status]
+            print("Статус успішно змінено!")
+            break
+        else:
+            print("Невірне значення, спробуйте ще раз.")
+
+
+def specific_list():
+    choice = input(f"Виберіть, який список завдань вивести: \n 1. Виконані \n 2. В процесі \n 3. Не виконані")
+    if choice == "1":
+        for t in task_list:
+            if t["status"] == "Виконано":
+                print(f"{t["id"]}. {t["text"]} - {t["status"]}")
+    elif choice == "2":
+        for t in task_list:
+            if t["status"] == "В процесі":
+                print(f"{t["id"]}. {t["text"]} - {t["status"]}")
+    elif choice == "3":
+        for t in task_list:
+            if t["status"] == "Не виконано":
+                print(f"{t["id"]}. {t["text"]} - {t["status"]}")
 
 
 
